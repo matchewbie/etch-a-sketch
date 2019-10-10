@@ -1,29 +1,121 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #888;
+}
+
 #container {
+    width: 512px;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: grey;
+    border: 1px solid #666;
+    text-align: center;
+}
+
+#container div span {
+    color: white;
+    text-shadow: 1px 1px black;
+}
+
+#resize, #reset {
+    height: 20px;
+    width: 75px;
+    color: white;
+    background-color: grey;
+    border-color: #999;
+    box-shadow: 1px 1px black;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+#grid-container {
     display: grid;
     grid-template-columns: repeat(16, 1fr);
     width: 512px;
     height: 512px;
-    margin: 0 auto;
+    margin-top: 30px;
     padding: 0;
-    background-color: grey;
+    border: 1px solid grey;
+    background-color: black;
+    cursor: crosshair;
 }
 
 .grid-cell {
-    margin: 1px;
+    margin: 0;
     padding: 0;
-    border: 1px solid #999;
     background-color: white;
-    box-shadow: 1px 1px black;
-    transition: 0.5s;
+    transition: 0.05s;
 }
 
 .cell-enter {
-    transform: scale(1.1);
+    transform: scale(.5);
+    border-radius: 100%;
 }
 
-.cell-leave {
+.classic {
     background-color: transparent;
-    transform: scale(1);
-    box-shadow: none;
-    border: none;
+    border-radius: 100%;
+}
+
+.modal {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: black;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    display: block;
+    background-color: black;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    text-align: center;
+    box-shadow: 2px 2px grey;
+}
+
+.modal-content div {
+    width: 75%;
+    margin: 0 auto;
+    padding: 25px;
+    background-color: white;
+    border: 1px solid black;
+    box-shadow: 2px 2px #999;
+}
+
+.modal-content p,
+.modal-content input {
+    width: 40%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.modal-close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    transition: 0.5s;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+    transform: rotate(45deg) scale(2);
+    color: green;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.fl-l {
+    float: left;
+}
+
+.fl-r {
+    float: right;
 }

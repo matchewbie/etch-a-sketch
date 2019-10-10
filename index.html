@@ -12,7 +12,24 @@
     </head>
 
     <body>
-        <div id="container"></div>
+        <div id="container">
+            
+            <div class="fl-l">
+                <span>Brush style: </span>
+                <select id="brush">
+                    <option value="classic">classic</option>
+                    <option value="color">color</option>
+                    <option value="shader">shader</option>
+                </select>
+            </div>
+
+            <div class="fl-r">
+                <button id="resize" type="button" onclick="resizeGrid();">RESIZE</button>
+                <button id="reset" type="button" onclick="resetGrid();">RESET</button>
+            </div>
+
+            <div id="grid-container"></div>
+        </div>
 
         <script type="text/javascript" src="js/script.js"></script>
     </body>
