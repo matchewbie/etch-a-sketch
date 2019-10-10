@@ -94,6 +94,14 @@ body {
     margin: 0;
     padding: 0;
     text-align: center;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.squared {
+    padding: 5px;
+    font-size: 10px;
+    font-weight: bold;
 }
 
 .modal-close {

@@ -1,60 +1,14 @@
-function generateModal() {
+const gridContainer = document.getElementById('grid-container');
 
-    const modal = document.createElement('div');
-    modal.classList.add('modal');
+const classicBrush = document.getElementById('brush')[0];
+classicBrush.addEventListener('click', () => resetBrush(classicBrush.value));
 
-    const modalContent = document.createElement('div');
-    modalContent.classList.add('modal-content');
+const colorBrush = document.getElementById('brush')[1];
+colorBrush.addEventListener('click', () =>  resetBrush(colorBrush.value));
 
-    const span = document.createElement('span');
-    span.classList.add('modal-close');
-    span.innerHTML = "&times;";
+var currentBrush = classicBrush.value;
 
-    const div = document.createElement('div');
-
-    const p = document.createElement('p');
-    p.textContent = "Enter desired size of grid:";
-    p.classList.add('fl-l');
-
-    const input = document.createElement('input');
-    input.type = "text";
-    input.defaultValue = "16";
-    p.classList.add('fl-l');
-
-    div.innerHTML += p.outerHTML + input.outerHTML;
-    modalContent.innerHTML += span.outerHTML + div.outerHTML;
-
-    document.body.insertBefore(modal, document.body.firstChild);
-    modal.appendChild(modalContent);
-
-    var newSize = modalContent.querySelector('input');
-
-    modalContent.querySelector('.modal-close').onclick = () => {
-
-        createGrid(newSize.value);
-        document.body.removeChild(modal);    }
-}
-
-
-
-function getCells () {
-    return document.querySelectorAll('.grid-cell');
-}
-
-
-
-function resetGrid() {
-    getCells().forEach(cell => cell.classList.remove('classic'));
-}
-
-
-
-function resizeGrid() {
-    
-    getCells().forEach(cell => cell.parentNode.removeChild(cell));
-
-    generateModal();
-}
+var currentGridSize = 16;
 
 
 
@@ -70,27 +24,154 @@ function createGrid(size) {
         gridContainer.appendChild(gridCell);
     }
 
-    getCells().forEach(cell => cell.addEventListener('mouseenter', () => cell.classList.add('cell-enter')));
-    getCells().forEach(cell => cell.addEventListener('mouseleave', () => {
-        cell.classList.add('classic');
-        cell.classList.remove('cell-enter');
-    }));
+    setBrush(currentBrush);    
 }
 
 
 
+function generateModal() {
+
+    const modal = document.createElement('div');
+    modal.classList.add('modal');
+
+    const modalContent = document.createElement('div');
+    modalContent.classList.add('modal-content');
+
+    const modalClose = document.createElement('span');
+    modalClose.classList.add('modal-close');
+    modalClose.innerHTML = "&times;";
+
+    const div = document.createElement('div');
+
+    const p = document.createElement('p');
+    p.textContent = "Enter desired grid-size:";
+    p.classList.add('fl-l');
+
+    const input = document.createElement('input');
+    input.type = "text";
+    input.defaultValue = "16";
+    p.classList.add('fl-l');
+
+    const squared = document.createElement('sup');
+    squared.textContent = "2";
+    squared.classList.add('squared');
+
+    div.innerHTML += p.outerHTML + input.outerHTML + squared.outerHTML;
+    modalContent.innerHTML += modalClose.outerHTML + div.outerHTML;
+
+    document.body.insertBefore(modal, document.body.firstChild);
+    modal.appendChild(modalContent);
+
+    var newSize = modalContent.querySelector('input');
+
+    newSize.addEventListener('keypress', e => {
+
+        var key = e.which || e.keyCode;
+        if (key === 13) {
+            
+            resize(modal, Math.round(newSize.value));
+        }
+    });
+    
+    modalContent.querySelector('.modal-close').onclick = () => {
+
+        resize(modal, Math.round(newSize.value));
+
+    }
+}
 
 
 
-
-const gridContainer = document.getElementById('grid-container');
-
-// let brushes = document.getElementById('brush');
-
-// console.log(brushes);
-
-const defaultGridSize = 16;
+function getCells () {
+    return document.querySelectorAll('.grid-cell');
+}
 
 
 
-createGrid(defaultGridSize);
+function randomRgb() {
+    var r = Math.floor(Math.random() * 256);
+    var g = Math.floor(Math.random() * 256);
+    var b = Math.floor(Math.random() * 256);
+
+    return `rgb(${r}, ${g}, ${b})`;
+}
+
+
+
+function removeGrid() {
+    getCells().forEach(cell => cell.parentNode.removeChild(cell));
+}
+
+
+
+function resetBrush(brush) {
+
+    currentBrush = brush;
+
+    removeGrid();
+    createGrid(currentGridSize);
+}
+
+
+
+function resetGrid() {
+
+    getCells().forEach(cell => {
+
+        if (currentBrush == classicBrush.value) {
+
+            cell.classList.remove(currentBrush)
+        }
+        else {
+            cell.removeAttribute("style");
+            
+        }
+    });
+}
+
+
+
+function resize(modal, size) {
+
+    currentGridSize = size;
+
+    createGrid(currentGridSize);
+    document.body.removeChild(modal);
+}
+
+
+
+function resizeGrid() {
+    
+    removeGrid();
+    generateModal();
+}
+
+
+
+function setBrush(brush) {
+    
+    getCells().forEach(cell => cell.addEventListener('mouseenter', () => {
+
+        if (currentBrush == classicBrush.value) {
+
+            cell.classList.add('cell-enter')
+        }
+        else {
+            cell.style.backgroundColor = randomRgb();
+        }
+    }));
+    
+    if (currentBrush == classicBrush.value) {
+
+        getCells().forEach(cell => cell.addEventListener('mouseleave', () => {
+            
+            cell.classList.add(brush);
+            cell.classList.remove('cell-enter');
+        }));
+    }
+}
+
+
+
+createGrid(currentGridSize);
