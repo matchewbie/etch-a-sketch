@@ -184,7 +184,7 @@ function setBrush(brush) {                          // set currently selected BR
 
         if (currentBrush == classicBrush.id) {                                  // if CLASSIC 
 
-            cell.classList.add('cell-enter');                                   // add transition style
+            cell.classList.add('brush');                                        // add transition style
         }
         else if (currentBrush == colorBrush.id) {                               // if COLOR
             cell.style.backgroundColor = randomRgb();                           // set background-color to a random RGB
@@ -199,17 +199,8 @@ function setBrush(brush) {                          // set currently selected BR
             }
         }
     }));
-    
-    if (currentBrush == classicBrush.id) {                                      // if CLASSIC
-
-        getCells().forEach(cell => cell.addEventListener('mouseleave', () => {  // on leaving cell
-            
-            cell.classList.add(brush);                                          // add transparent style
-            cell.classList.remove('cell-enter');                                // remove transition style
-        }));
-    }
 }
 
 
 
-createGrid(currentGridSize);        // initialize DEFAULT grid for page load
+createGrid(currentGridSize);                        // initialize DEFAULT grid for page load
