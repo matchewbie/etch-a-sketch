@@ -1,12 +1,16 @@
 const gridContainer = document.getElementById('grid-container');
 
-const classicBrush = document.getElementById('brush')[0];
-classicBrush.addEventListener('click', () => resetBrush(classicBrush.value));
+const classicBrush = document.getElementById('classic');
+classicBrush.addEventListener('click', () => resetBrush(classicBrush.id));
 
-const colorBrush = document.getElementById('brush')[1];
-colorBrush.addEventListener('click', () =>  resetBrush(colorBrush.value));
+const colorBrush = document.getElementById('color-bg');
+colorBrush.addEventListener('click', () =>  resetBrush(colorBrush.id));
 
-var currentBrush = classicBrush.value;
+const shaderBrush = document.getElementById('shader');
+shaderBrush.addEventListener('click', () => resetBrush(shaderBrush.id));
+
+var currentBrush = classicBrush.id;
+var opacity;
 
 var currentGridSize = 16;
 
@@ -118,13 +122,17 @@ function resetGrid() {
 
     getCells().forEach(cell => {
 
-        if (currentBrush == classicBrush.value) {
+        if (currentBrush == classicBrush.id) {
 
             cell.classList.remove(currentBrush)
         }
         else {
             cell.removeAttribute("style");
-            
+
+            if (currentBrush == shaderBrush.id) {
+
+                cell.style.opacity = "1";
+            }
         }
     });
 }
@@ -150,19 +158,36 @@ function resizeGrid() {
 
 
 function setBrush(brush) {
+
+    if (currentBrush == shaderBrush.id)
+    {
+        getCells().forEach(cell => {
+
+            cell.style.opacity = "1";
+        });
+    }
     
     getCells().forEach(cell => cell.addEventListener('mouseenter', () => {
 
-        if (currentBrush == classicBrush.value) {
+        if (currentBrush == classicBrush.id) {
 
             cell.classList.add('cell-enter')
         }
-        else {
+        else if (currentBrush == colorBrush.id) {
             cell.style.backgroundColor = randomRgb();
+        }
+        else {
+
+            if (cell.style.opacity <= 0) {
+                cell.style.backgroundColor = "black";
+            }
+            else {
+                cell.style.opacity -= 0.1;
+            }
         }
     }));
     
-    if (currentBrush == classicBrush.value) {
+    if (currentBrush == classicBrush.id) {
 
         getCells().forEach(cell => cell.addEventListener('mouseleave', () => {
             
