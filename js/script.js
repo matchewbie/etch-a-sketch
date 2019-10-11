@@ -184,7 +184,7 @@ function setBrush(brush) {                          // set currently selected BR
 
         if (currentBrush == classicBrush.id) {                                  // if CLASSIC 
 
-            cell.classList.add('brush');                                        // add transition style
+            cell.classList.add(brush);                                        // add transition style
         }
         else if (currentBrush == colorBrush.id) {                               // if COLOR
             cell.style.backgroundColor = randomRgb();                           // set background-color to a random RGB

@@ -53,11 +53,6 @@ span {
     transition: 0.05s;
 }
 
-.cell-enter {
-    transform: scale(.5);
-    border-radius: 100%;
-}
-
 .classic {
     background-color: transparent;
     border-radius: 100%;
