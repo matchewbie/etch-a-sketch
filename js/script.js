@@ -3,20 +3,37 @@ const gridContainer = document.getElementById('grid-container');
 
 // grab and listen for CLASSIC BRUSH click
 const classicBrush = document.getElementById('classic');
-classicBrush.addEventListener('click', () => resetBrush(classicBrush.id));  // reset sketch-pad to CLASSIC
+classicBrush.addEventListener('click', () => resetBrush(classic));          // reset sketch-pad to CLASSIC
 
 // grab and listen for COLOR BRUSH click
-const colorBrush = document.getElementById('color-bg');
-colorBrush.addEventListener('click', () =>  resetBrush(colorBrush.id));     // reset sketch-pad to COLOR
+const colorBrush = document.getElementById('colorBg');
+colorBrush.addEventListener('click', () =>  resetBrush(colorBg));           // reset sketch-pad to COLOR
 
 // grab and listen for SHADER BRUSH click
 const shaderBrush = document.getElementById('shader');
-shaderBrush.addEventListener('click', () => resetBrush(shaderBrush.id));    // reset sketch-pad to SHADER
+shaderBrush.addEventListener('click', () => resetBrush(shader));            // reset sketch-pad to SHADER
 
 // declare & initialize global variables
-var currentBrush = classicBrush.id;                                         // set classic brush to load-default
+var currentBrush = classic;                                                 // set classic brush to load-default
 var currentGridSize = 16;                                                   // set 16 to be squared for load-default
-var opacity;                                                                // declare to initialice to each cell later
+
+
+
+function addListeners() {                                                   // add listeners for current brush
+    getCells().forEach(cell => cell.addEventListener('mouseenter', currentBrush));
+}
+
+
+
+function classic() {                                                        // classic brush
+    this.style.backgroundColor = "black";                                   // add black background to cell
+}
+
+
+
+function colorBg() {                                                        // random color brush
+    this.style.backgroundColor = randomRgb();                               // add random RGB background to cell
+}
 
 
 
@@ -30,10 +47,11 @@ function createGrid(size) {
     for (let i = 0; i < size ** 2; i++) {                                   // create cells of grid by squaring size given
         var gridCell = document.createElement('div');                       // create cell
         gridCell.classList.add('grid-cell');                                // style cell
+        gridCell.style.opacity = "1";                                       // set cell opacity level to opaque
         gridContainer.appendChild(gridCell);                                // append cell to grid
     }
 
-    setBrush(currentBrush);                                                 // set currently selected brush
+    setBrush();                                                             // set currently selected brush
 }
 
 
@@ -117,13 +135,20 @@ function removeGrid() {                                             // remove al
 
 
 
+function removeListeners() {                                        // remove listeners for current brush
+    getCells().forEach(cell => cell.removeEventListener('mouseenter', currentBrush));
+}
+
+
 
 function resetBrush(brush) {                        // reset BRUSH from its given button-click
 
-    currentBrush = brush;                           // update passed BRUSH to current
+    removeListeners();                              // remove current BRUSH listeners
 
-    removeGrid();                                   // remove all cells
-    createGrid(currentGridSize);                    // remake grid with last stored size and current BRUSH
+    currentBrush = brush;                           // update current BRUSH to newly selected
+
+    setBrush();                                     // set current BRUSH
+
 }
 
 
@@ -133,21 +158,10 @@ function resetGrid() {                              // on button-click, clear dr
 
     getCells().forEach(cell => {
 
-        if (currentBrush == classicBrush.id) {
-
-            cell.classList.remove(currentBrush)     // remove CLASSIC BRUSH class from each cell
-        }
-        else {
-            cell.removeAttribute("style");          // remove COLOR/SHADER BRUSH generated styling from each cell
-
-            if (currentBrush == shaderBrush.id) {
-
-                cell.style.opacity = "1";           // reset each cell to be opaque
-            }
-        }
+        cell.removeAttribute("style");              // remove COLOR/SHADER BRUSH generated styling from each cell
+        cell.style.opacity = "1";
     });
 }
-
 
 
 
@@ -161,7 +175,6 @@ function resize(modal, size) {                      // pass new grid size to be 
 
 
 
-
 function resizeGrid() {                             // on button-click
     
     removeGrid();                                   // remove all cells
@@ -170,35 +183,25 @@ function resizeGrid() {                             // on button-click
 
 
 
-function setBrush(brush) {                          // set currently selected BRUSH
-
-    if (currentBrush == shaderBrush.id)             // if SHADER
-    {
-        getCells().forEach(cell => {
-
-            cell.style.opacity = "1";               // set each cell's opaque value
-        });
-    }
+function setBrush() {                               // set newly selected current BRUSH
     
-    getCells().forEach(cell => cell.addEventListener('mouseenter', () => {      // on entering cell
+    addListeners();                                 // add listeners for current BRUSH
+}
 
-        if (currentBrush == classicBrush.id) {                                  // if CLASSIC 
 
-            cell.classList.add(brush);                                        // add transition style
-        }
-        else if (currentBrush == colorBrush.id) {                               // if COLOR
-            cell.style.backgroundColor = randomRgb();                           // set background-color to a random RGB
-        }
-        else {                                                                  // if SHADER
 
-            if (cell.style.opacity == 0) {                                      // if cell is transparent
-                cell.style.backgroundColor = "black";                           // set background-color to black
-            }
-            else {
-                cell.style.opacity -= 0.1;                                      // darken cell by 1/10th
-            }
-        }
-    }));
+function shader() {                                 // shader brush
+
+    if (this.style.backgroundColor == "black") {    // if background already black
+        return;                                     // don't shade
+    }
+    else if (this.style.opacity == 0) {             // if cell is transparent
+
+        this.style.backgroundColor = "black";       // set background-color to black
+    }
+    else {                                          // otherwise
+        this.style.opacity -= 0.1;                  // darken cell by 1/10th
+    }
 }
 
 

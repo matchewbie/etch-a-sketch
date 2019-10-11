@@ -1,6 +1,6 @@
 Etch-A-Sketch
 
-Three sketch-pad styles!
+Three brush styles!
 - CLASSIC
 - COLOR (random)
 - SHADER

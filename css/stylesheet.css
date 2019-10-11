@@ -21,7 +21,7 @@ span {
 }
 
 #classic,
-#color-bg,
+#colorBg,
 #shader,
 #resize,
 #reset {
@@ -50,10 +50,6 @@ span {
     margin: 0;
     padding: 0;
     background-color: white;
-}
-
-.classic {
-    background-color: transparent;
 }
 
 .modal {
