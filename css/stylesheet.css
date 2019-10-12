@@ -138,12 +138,16 @@ span {
     border: 1px solid grey;
     background-color: black;
     cursor: crosshair;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
 
 .grid-cell {
     margin: 0;
     padding: 0;
     background-color: white;
+    border: 0;
     outline: none;
     -webkit-appearance: none;
     -moz-appearance: none;
