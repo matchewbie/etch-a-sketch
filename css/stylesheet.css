@@ -9,10 +9,11 @@ body {
     margin: 0 auto;
     padding: 10px;
     background-image: linear-gradient(to bottom right, darkgrey, dimgrey);
-    border-top: 2px outset lightgrey;
-    border-left: 2px outset lightgrey;
-    border-bottom: 2px outset black;
-    border-right: 2px outset black;
+    border-top: 4px outset lightgrey;
+    border-left: 4px outset lightgrey;
+    border-bottom: 4px outset black;
+    border-right: 4px outset black;
+    border-radius: 5px;
     text-align: center;
 }
 
@@ -31,6 +32,7 @@ span {
     font-size: 14px;
     font-weight: bold;
     border: 1px solid black;
+    border-radius: 5px;
     text-shadow: 1px 1px grey;
     box-shadow: 3px 3px dimgrey;
     cursor: default;
