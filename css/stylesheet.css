@@ -144,6 +144,9 @@ span {
     margin: 0;
     padding: 0;
     background-color: white;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
 
 .modal {
@@ -189,6 +192,7 @@ div {
     text-align: center;
     outline: none;
     -webkit-appearance: none;
+    -moz-appearance: none;
 }
 
 .squared {
