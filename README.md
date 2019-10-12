@@ -1,12 +1,11 @@
 Etch-A-Sketch
 
-Three brush styles!
-- CLASSIC
-- COLOR (random)
+Four brush styles!
+- BLACK
+- RANDOM (rgb colors)
 - SHADER
+- ERASER
 
-MODAL generation (in place of the prompt pop-up) for resizing!
-
-I worked on this for hours over a few days and learned so much!
+MODAL generation (in place of the prompt pop-up) for resizing the grid!
 
 from THE ODIN PROJECT

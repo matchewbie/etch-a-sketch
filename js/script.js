@@ -1,17 +1,21 @@
 // grab container to store grid generated from this file
 const gridContainer = document.getElementById('grid-container');
 
-// grab and listen for CLASSIC BRUSH click
+// grab and listen for BLACK BRUSH click
 const classicBrush = document.getElementById('classic');
 classicBrush.addEventListener('click', () => resetBrush(classic));          // reset sketch-pad to CLASSIC
 
-// grab and listen for COLOR BRUSH click
+// grab and listen for RANDOM BRUSH click
 const colorBrush = document.getElementById('colorBg');
 colorBrush.addEventListener('click', () =>  resetBrush(colorBg));           // reset sketch-pad to COLOR
 
 // grab and listen for SHADER BRUSH click
 const shaderBrush = document.getElementById('shader');
 shaderBrush.addEventListener('click', () => resetBrush(shader));            // reset sketch-pad to SHADER
+
+// grab and listen for ERASER BRUSH click
+const eraserBrush = document.getElementById('erase');
+eraserBrush.addEventListener('click', () => resetBrush(eraser));
 
 // declare & initialize global variables
 var currentBrush = classic;                                                 // set classic brush to load-default
@@ -25,13 +29,15 @@ function addListeners() {                                                   // a
 
 
 
-function classic() {                                                        // classic brush
+function classic() {                                                        // BLACK BRUSH
+
     this.style.backgroundColor = "black";                                   // add black background to cell
 }
 
 
 
-function colorBg() {                                                        // random color brush
+function colorBg() {                                                        // RANDOM BRUSH
+
     this.style.backgroundColor = randomRgb();                               // add random RGB background to cell
 }
 
@@ -52,6 +58,14 @@ function createGrid(size) {
     }
 
     setBrush();                                                             // set currently selected brush
+}
+
+
+
+function eraser() {                                         // ERASER BRUSH
+
+    this.removeAttribute("style");                          // remove BRUSH generated styling from each cell
+    this.style.opacity = "1";                               // add opaque style to cell
 }
 
 
@@ -112,6 +126,7 @@ function generateModal() {                                  // generate and disp
 
 
 function getCells () {                                              // grab all cells
+
     return document.querySelectorAll('.grid-cell');
 }
 
@@ -154,12 +169,12 @@ function resetBrush(brush) {                        // reset BRUSH from its give
 
 
 
-function resetGrid() {                              // on button-click, clear drawing and reset to blank grid
+function resetGrid() {                              // RESET BUTTON
+    
+    getCells().forEach( cell => {
 
-    getCells().forEach(cell => {
-
-        cell.removeAttribute("style");              // remove COLOR/SHADER BRUSH generated styling from each cell
-        cell.style.opacity = "1";
+        cell.removeAttribute("style");              // remove BRUSH generated styling from each cell
+        cell.style.opacity = "1";                   // add opaque style to cell
     });
 }
 
@@ -175,7 +190,7 @@ function resize(modal, size) {                      // pass new grid size to be 
 
 
 
-function resizeGrid() {                             // on button-click
+function resizeGrid() {                             // RESIZE BUTTON
     
     removeGrid();                                   // remove all cells
     generateModal();                                // create pop-up MODAL
@@ -190,7 +205,7 @@ function setBrush() {                               // set newly selected curren
 
 
 
-function shader() {                                 // shader brush
+function shader() {                                 // SHADER BRUSH
 
     if (this.style.backgroundColor == "black") {    // if background already black
         return;                                     // don't shade

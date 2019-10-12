@@ -1,45 +1,124 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #888;
+    background-image: radial-gradient(circle, black, dimgrey);
 }
 
+#toolbar,
 #container {
     width: 512px;
     margin: 0 auto;
     padding: 10px;
-    background-color: grey;
-    border: 1px solid #666;
+    background-image: linear-gradient(to bottom right, darkgrey, dimgrey);
+    border-top: 2px outset lightgrey;
+    border-left: 2px outset lightgrey;
+    border-bottom: 2px outset black;
+    border-right: 2px outset black;
     text-align: center;
 }
 
-#container
+#toolbar {
+    height: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#toolbar
 div
 span {
-    color: white;
+    margin: 5px;
+    padding: 5px;
+    color: black;
     font-size: 14px;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-weight: bold;
+    border: 1px solid black;
+    text-shadow: 1px 1px grey;
+    box-shadow: 3px 3px dimgrey;
+    cursor: default;
 }
 
 #classic,
 #colorBg,
 #shader,
+#erase,
 #resize,
 #reset {
     height: 20px;
     width: 65px;
+    margin: 0;
+    padding: 1px;
+    border-radius: 8px;
+    box-shadow: 2px 3px black;
     color: white;
-    background-color: grey;
-    border-color: #999;
-    box-shadow: 1px 1px black;
+    font-weight: bold; 
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    cursor: pointer;
+}
+
+#classic:active,
+#colorBg:active,
+#shader:active,
+#erase:active,
+#resize:active,
+#reset:active {
+    box-shadow: 1px 2px black;
+    transform: translateY(1px);
+}
+
+#classic {
+    background-color: black;
+    border-top: 2px outset darkgray;
+    border-left: 2px outset darkgray;
+    border-bottom: 2px outset dimgrey;
+    border-right: 2px outset dimgrey;
+}
+
+#colorBg {
+    background-image: linear-gradient(to bottom right, yellow, purple);
+    border-top: 2px outset yellowgreen;
+    border-left: 2px outset yellowgreen;
+    border-bottom: 2px outset royalblue;
+    border-right: 2px outset royalblue;
+}
+
+#shader {
+    background-image: linear-gradient(to bottom right, darkgrey, black);
+    border-top: 2px outset lightgrey;
+    border-left: 2px outset lightgrey;
+    border-bottom: 2px outset dimgrey;
+    border-right: 2px outset dimgrey;
+}
+
+#erase {
+    background-color: salmon;
+    border-top: 2px outset pink;
+    border-left: 2px outset pink;
+    border-bottom: 2px outset palevioletred;
+    border-right: 2px outset palevioletred;
+}
+
+#resize {
+    width: 57px;
+    background-color: green;
+    border-top: 2px outset olivedrab;
+    border-left: 2px outset olivedrab;
+    border-bottom: 2px outset darkgreen;
+    border-right: 2px outset darkgreen;
+}
+
+#reset {
+    width: 57px;
+    background-color: red;
+    border-top: 2px outset indianred;
+    border-left: 2px outset indianred;
+    border-bottom: 2px outset firebrick;
+    border-right: 2px outset firebrick;
 }
 
 #grid-container {
     display: grid;
-    grid-template-columns: repeat(16, 1fr);
     width: 512px;
     height: 512px;
-    margin-top: 30px;
+    margin-top: 0;
     padding: 0;
     border: 1px solid grey;
     background-color: black;
