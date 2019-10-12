@@ -130,6 +130,7 @@ span {
 }
 
 #grid-container {
+    display: -ms-grid;
     display: grid;
     width: 512px;
     height: 512px;
@@ -138,9 +139,6 @@ span {
     border: 1px solid grey;
     background-color: black;
     cursor: crosshair;
-    outline: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
 }
 
 .grid-cell {
@@ -148,9 +146,6 @@ span {
     padding: 0;
     background-color: white;
     border: 0;
-    outline: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
 }
 
 .modal {
