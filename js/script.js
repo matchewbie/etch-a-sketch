@@ -49,7 +49,6 @@ function createGrid(size) {
     size = (size > 64) ? 64 : (size < 0) ? 1 : size;                        // limit grid from 0 to 64^2
 
     gridContainer.style.gridTemplateColumns = `repeat(${size}, 1fr)`;       // adjust #grid-container css grid columns
-    gridContainer.style.msGridColumns = `(1fr)[${size}]`;                   // IE support
 
     for (let i = 0; i < size ** 2; i++) {                                   // create cells of grid by squaring size given
         var gridCell = document.createElement('div');                       // create cell

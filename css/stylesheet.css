@@ -3,7 +3,6 @@ body {
     background-image: radial-gradient(circle, black, dimgrey);
     margin: 0;
     padding: 0;
-    z-index: -1;
 }
 
 #margin-top {
@@ -130,13 +129,13 @@ span {
 }
 
 #grid-container {
-    display: -ms-grid;
     display: grid;
+    grid-gap: 0;
     width: 512px;
     height: 512px;
     margin-top: 0;
     padding: 0;
-    border: 1px solid grey;
+    border: 0;
     background-color: black;
     cursor: crosshair;
 }
@@ -151,7 +150,6 @@ span {
 .modal {
     display: block;
     position: fixed;
-    z-index: 1;
     margin-top: 0;
     margin-left: 0;
     padding-top: 130px;
