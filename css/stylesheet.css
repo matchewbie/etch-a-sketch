@@ -37,13 +37,14 @@ div
 span {
     margin: 5px;
     padding: 5px;
+    background-color: lightgrey;
     color: black;
     font-size: 14px;
     font-weight: bold;
     border: 1px solid black;
     border-radius: 5px;
     text-shadow: 1px 1px grey;
-    box-shadow: 3px 3px dimgrey;
+    box-shadow: 2px 3px dimgrey;
     cursor: default;
 }
 
