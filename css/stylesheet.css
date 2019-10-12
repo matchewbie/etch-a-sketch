@@ -5,6 +5,11 @@ body {
     padding: 0;
 }
 
+/* for IE grid */
+table {
+    border-collapse: collapse;
+}
+
 #margin-top {
     margin: 0;
     padding: 0;
@@ -129,6 +134,7 @@ span {
 }
 
 #grid-container {
+    display: -ms-grid;
     display: grid;
     grid-gap: 0;
     width: 512px;
