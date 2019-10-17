@@ -143,7 +143,7 @@ function generateOnloadModal() {
     const div = document.createElement('div');
 
     const h3 = document.createElement('h3');
-    h3.textContent = "Hold down mouse button to draw!";
+    h3.textContent = "Hold the mouse button to draw!";
 
     const h4 = document.createElement('h4');
     h4.textContent = 'RESIZE to change "pixel" size.';
