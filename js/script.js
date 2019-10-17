@@ -145,7 +145,10 @@ function generateOnloadModal() {
     const h3 = document.createElement('h3');
     h3.textContent = "Hold down mouse button to draw!";
 
-    div.innerHTML += h3.outerHTML;
+    const h4 = document.createElement('h4');
+    h4.textContent = 'RESIZE to change "pixel" size.';
+
+    div.innerHTML += h3.outerHTML + h4.outerHTML;
     modalContent.innerHTML += modalClose.outerHTML + div.outerHTML;
 
     document.body.insertBefore(modal, document.body.firstChild);
