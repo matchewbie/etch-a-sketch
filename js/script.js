@@ -1,5 +1,8 @@
 // grab container to store grid generated from this file
 const gridContainer = document.getElementById('grid-container');
+gridContainer.addEventListener('mousedown', addListeners);
+gridContainer.addEventListener('mouseup', removeListeners);
+gridContainer.addEventListener('contextmenu', e => e.preventDefault());
 
 // grab and listen for BLACK BRUSH click
 const classicBrush = document.getElementById('classic');
@@ -54,10 +57,11 @@ function createGrid(size) {
         var gridCell = document.createElement('div');                       // create cell
         gridCell.classList.add('grid-cell');                                // style cell
         gridCell.style.opacity = "1";                                       // set cell opacity level to opaque
+        gridCell.draggable = false;
         gridContainer.appendChild(gridCell);                                // append cell to grid
     }
 
-    setBrush();                                                             // set currently selected brush
+    // setBrush();                                                             // set currently selected brush
 }
 
 
@@ -67,7 +71,6 @@ function eraser() {                                         // ERASER BRUSH
     this.removeAttribute("style");                          // remove BRUSH generated styling from each cell
     this.style.opacity = "1";                               // add opaque style to cell
 }
-
 
 
 
@@ -125,6 +128,38 @@ function generateModal() {                                  // generate and disp
 
 
 
+function generateOnloadModal() {
+
+    const modal = document.createElement('div');
+    modal.classList.add('modal');
+
+    const modalContent = document.createElement('div');
+    modalContent.classList.add('modal-content');
+
+    const modalClose = document.createElement('span');
+    modalClose.classList.add('modal-close');
+    modalClose.innerHTML = "&times;";
+
+    const div = document.createElement('div');
+
+    const h3 = document.createElement('h3');
+    h3.textContent = "Hold down mouse button to draw!";
+
+    div.innerHTML += h3.outerHTML;
+    modalContent.innerHTML += modalClose.outerHTML + div.outerHTML;
+
+    document.body.insertBefore(modal, document.body.firstChild);
+    modal.appendChild(modalContent);
+    
+    modalContent.querySelector('.modal-close').onclick = () => {
+
+        document.body.removeChild(modal);
+
+    }
+}
+
+
+
 function getCells () {                                              // grab all cells
 
     return document.querySelectorAll('.grid-cell');
@@ -158,11 +193,11 @@ function removeListeners() {                                        // remove li
 
 function resetBrush(brush) {                        // reset BRUSH from its given button-click
 
-    removeListeners();                              // remove current BRUSH listeners
+    // removeListeners();                              // remove current BRUSH listeners
 
     currentBrush = brush;                           // update current BRUSH to newly selected
 
-    setBrush();                                     // set current BRUSH
+    // setBrush();                                     // set current BRUSH
 
 }
 
@@ -198,10 +233,10 @@ function resizeGrid() {                             // RESIZE BUTTON
 
 
 
-function setBrush() {                               // set newly selected current BRUSH
+// function setBrush() {                               // set newly selected current BRUSH
     
-    addListeners();                                 // add listeners for current BRUSH
-}
+//     addListeners();                                 // add listeners for current BRUSH
+// }
 
 
 
@@ -222,3 +257,4 @@ function shader() {                                 // SHADER BRUSH
 
 
 createGrid(currentGridSize);                        // initialize DEFAULT grid for page load
+generateOnloadModal();
