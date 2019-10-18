@@ -1,7 +1,5 @@
 // grab container to store grid generated from this file
 const gridContainer = document.getElementById('grid-container');
-gridContainer.addEventListener('mousedown', addListeners);
-gridContainer.addEventListener('mouseup', removeListeners);
 gridContainer.addEventListener('contextmenu', e => e.preventDefault());
 
 // grab and listen for BLACK BRUSH click
@@ -27,7 +25,11 @@ var currentGridSize = 16;                                                   // s
 
 
 function addListeners() {                                                   // add listeners for current brush
-    getCells().forEach(cell => cell.addEventListener('mouseenter', currentBrush));
+    getCells().forEach(cell => {
+        cell.addEventListener('mousedown', currentBrush);
+        cell.addEventListener('mousedown', () => getCells().forEach(cell2 => cell2.addEventListener('mouseenter', currentBrush)));
+        cell.addEventListener('mouseup', () => getCells().forEach(cell2 => cell2.removeEventListener('mouseenter', currentBrush)));
+    });
 }
 
 
@@ -61,7 +63,7 @@ function createGrid(size) {
         gridContainer.appendChild(gridCell);                                // append cell to grid
     }
 
-    // setBrush();                                                             // set currently selected brush
+    setBrush();                                                             // set currently selected brush
 }
 
 
@@ -189,18 +191,22 @@ function removeGrid() {                                             // remove al
 
 
 function removeListeners() {                                        // remove listeners for current brush
-    getCells().forEach(cell => cell.removeEventListener('mouseenter', currentBrush));
+    getCells().forEach(cell => {
+        cell.removeEventListener('mousedown', currentBrush);
+        cell.removeEventListener('mousedown', () => getCells().forEach(cell2 => cell2.addEventListener('mouseenter', currentBrush)));
+        cell.removeEventListener('mouseup', () => getCells().forEach(cell2 => cell2.removeEventListener('mouseenter', currentBrush)));
+    });
 }
 
 
 
 function resetBrush(brush) {                        // reset BRUSH from its given button-click
 
-    // removeListeners();                              // remove current BRUSH listeners
+    removeListeners();                              // remove current BRUSH listeners
 
     currentBrush = brush;                           // update current BRUSH to newly selected
 
-    // setBrush();                                     // set current BRUSH
+    setBrush();                                     // set current BRUSH
 
 }
 
@@ -236,10 +242,10 @@ function resizeGrid() {                             // RESIZE BUTTON
 
 
 
-// function setBrush() {                               // set newly selected current BRUSH
+function setBrush() {                               // set newly selected current BRUSH
     
-//     addListeners();                                 // add listeners for current BRUSH
-// }
+    addListeners();                                 // add listeners for current BRUSH
+}
 
 
 
