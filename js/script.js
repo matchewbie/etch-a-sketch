@@ -1,6 +1,9 @@
 // grab container to store grid generated from this file
 const gridContainer = document.getElementById('grid-container');
 gridContainer.addEventListener('contextmenu', e => e.preventDefault());
+gridContainer.addEventListener('mouseleave', () => {
+   getCells().forEach(cell => cell.removeEventListener('mouseenter', currentBrush));
+});
 
 // grab and listen for BLACK BRUSH click
 const classicBrush = document.getElementById('classic');
